@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#pragma warning(disable : 4996)
 using namespace std;
 
 class Point {
@@ -32,14 +33,24 @@ public:
 
 };
 
-class ArrClass {
+class ArrPoint {
 	Point* pnt;
 	int size;
 	static int count;
 	char pach[255];
-
+	void name() {
+		string pa = "fil" + to_string(count) + ".bin";
+		strncpy(pach, pa.c_str(), pa.length() + 1);
+	}
+public:
+	void names() {
+		count++;
+		name();
+		cout << pach << '|' << endl;
+	}
 };
 
+int ArrPoint::count = 0;
 
 
 int main()
@@ -76,6 +87,9 @@ int main()
 	}
 	fin.close();
 	
+	ArrPoint ap;
+	ap.names();
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

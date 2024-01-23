@@ -128,6 +128,7 @@ public:
 		name();
 
 	}
+	void 
 };
 
 int ArrPoint::count = 0;

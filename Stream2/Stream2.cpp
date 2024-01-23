@@ -38,16 +38,17 @@ class ArrPoint {
 	int size;
 	static int count;
 	char pach[255];
+	char pachC[10] = "Count.bin";
 	void name() {
 		string pa = "fil" + to_string(count) + ".bin";
 		strncpy(pach, pa.c_str(), pa.length() + 1);
 	}
-public:
-	void names() {
-		count++;
-		name();
-		cout << pach << '|' << endl;
+	void wrtPach() {
+
 	}
+
+public:
+
 };
 
 int ArrPoint::count = 0;
@@ -86,9 +87,7 @@ int main()
 		}
 	}
 	fin.close();
-	
-	ArrPoint ap;
-	ap.names();
+
 
 }
 

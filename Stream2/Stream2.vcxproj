@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FIL.bin" />
+    <None Include="fil1.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

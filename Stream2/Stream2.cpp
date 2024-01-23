@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <time.h>
 #pragma warning(disable : 4996)
 using namespace std;
 
@@ -73,7 +74,7 @@ class ArrPoint {
 		fout.close();
 		return true;
 	}
-	bool rdSize() {
+	bool rdSize(string pach) {
 		ifstream fin;
 		fin.open(pach);
 
@@ -88,7 +89,7 @@ class ArrPoint {
 		return true;
 	}
 
-	bool rdPach() {
+	bool rdPach(string pach) {
 		ifstream fin;
 		fin.open(pach);
 		pnt = new Point[size];
@@ -109,26 +110,44 @@ public:
 
 		count++;
 		name();
-		if (!wrtPach()) {
-			cout << "error" << pach << endl;
-		}
 		if (!wrtCount()) {
 			cout << "error" << pachC << endl;
 		}
+		for (size_t i = 0; i < size; i++)
+		{
+			pnt[i].setXY(rand() % 10 + 1, rand() % 10 + 1);
+		}
+		if (!wrtPach()) {
+			cout << "error" << pach << endl;
+		}
+
 	}
 	ArrPoint():ArrPoint(5){}
 	ArrPoint(string pach) {
-		if (!rdSize()) {
-			cout << "error" << pach << endl;
+		if (!rdSize(pach)) {
+			cout << "error " << pach << endl;
 		}
-		if (!rdPach()) {
-			cout << "error" << pach << endl;
+		if (!rdPach(pach)) {
+			cout << "error " << pach << endl;
 		}
 		count++;
 		name();
-
+		if (!wrtPach()) {
+			cout << "error" << pach << endl;
+		}
 	}
-	void 
+	void print(ostream& ost) {
+		for (size_t i = 0; i < size; i++)
+		{
+			pnt[i].print(ost);
+		}
+	}friend ostream& operator<< (ostream& ost, ArrPoint& ap) {
+		ap.print(ost);
+		return ost;
+	}
+	string getPach() {
+		return pach;
+	}
 };
 
 int ArrPoint::count = 0;
@@ -136,6 +155,12 @@ int ArrPoint::count = 0;
 
 int main()
 {
+	ArrPoint ap(3);
+	cout << ap;
+	ArrPoint ap2(ap.getPach());
+	cout << ap2;
+
+	ArrPoint* ap3 = new ArrPoint[3];
 
 }
 

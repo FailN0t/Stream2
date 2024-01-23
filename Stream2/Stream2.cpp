@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <string>
 #include <fstream>
 using namespace std;
 
@@ -30,6 +31,15 @@ public:
 	}
 
 };
+
+class ArrClass {
+	Point* pnt;
+	int size;
+	static int count;
+	char pach[255];
+
+};
+
 
 
 int main()

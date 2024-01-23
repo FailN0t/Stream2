@@ -46,11 +46,14 @@ class ArrPoint {
 	bool wrtPach() {
 		ofstream fout;
 		fout.open(pach, ofstream::out);
+		fout.close();
+		fout.open(pach, ofstream::app);
 		if (!fout.is_open()) {
 			cout << "err: " << pach << endl;
 			return false;
 		}
 		else {
+			fout.write((char*)&size, sizeof(int));
 			fout.write((char*)&pnt, sizeof(Point) * size);
 		}
 		fout.close();
@@ -73,20 +76,18 @@ class ArrPoint {
 
 	bool rdPach() {
 		ifstream fin;
-		pnt2 = new Point[4];
 		fin.open(pach);
 
 		if (!fin.is_open()) {
 			cout << "err: " << pach << endl;
+			return false;
 		}
 		else {
-			while (fin.read((char*)&pnt2, sizeof(Point) * 4)) {}
-			for (size_t i = 0; i < 4; i++)
-			{
-				cout << pnt2[i];
-			}
+			fin.read((char*)&size, sizeof(int));
+			fin.read((char*)&pnt, sizeof(Point) * size);
 		}
 		fin.close();
+		return true;
 	}
 
 public:

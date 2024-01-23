@@ -43,12 +43,68 @@ class ArrPoint {
 		string pa = "fil" + to_string(count) + ".bin";
 		strncpy(pach, pa.c_str(), pa.length() + 1);
 	}
-	void wrtPach() {
+	bool wrtPach() {
+		ofstream fout;
+		fout.open(pach, ofstream::out);
+		if (!fout.is_open()) {
+			cout << "err: " << pach << endl;
+			return false;
+		}
+		else {
+			fout.write((char*)&pnt, sizeof(Point) * size);
+		}
+		fout.close();
+		return true;
+	}
 
+	bool wrtCount() {
+		ofstream fout;
+		fout.open(pachC, ofstream::out);
+		if (!fout.is_open()) {
+			cout << "err: " << pach << endl;
+			return false;
+		}
+		else {
+			fout.write((char*)&count, sizeof(int));
+		}
+		fout.close();
+		return true;
+	}
+
+	bool rdPach() {
+		ifstream fin;
+		pnt2 = new Point[4];
+		fin.open(pach);
+
+		if (!fin.is_open()) {
+			cout << "err: " << pach << endl;
+		}
+		else {
+			while (fin.read((char*)&pnt2, sizeof(Point) * 4)) {}
+			for (size_t i = 0; i < 4; i++)
+			{
+				cout << pnt2[i];
+			}
+		}
+		fin.close();
 	}
 
 public:
+	ArrPoint(int i) : pnt{ new Point[i] }, size{ i } {
 
+		count++;
+		name();
+		if (!wrtPach()) {
+			cout << "error" << pach << endl;
+		}
+		if (!wrtCount()) {
+			cout << "error" << pachC << endl;
+		}
+	}
+	ArrPoint():ArrPoint(5){}
+	ArrPoint(string pach) {
+
+	}
 };
 
 int ArrPoint::count = 0;

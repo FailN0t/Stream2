@@ -91,12 +91,13 @@ class ArrPoint {
 	bool rdPach() {
 		ifstream fin;
 		fin.open(pach);
-
+		pnt = new Point[size];
 		if (!fin.is_open()) {
 			cout << "err: " << pach << endl;
 			return false;
 		}
 		else {
+			fin.read((char*)&size, sizeof(int));
 			fin.read((char*)&pnt, sizeof(Point) * size);
 		}
 		fin.close();
@@ -117,7 +118,15 @@ public:
 	}
 	ArrPoint():ArrPoint(5){}
 	ArrPoint(string pach) {
-		if()
+		if (!rdSize()) {
+			cout << "error" << pach << endl;
+		}
+		if (!rdPach()) {
+			cout << "error" << pach << endl;
+		}
+		count++;
+		name();
+
 	}
 };
 
@@ -126,38 +135,6 @@ int ArrPoint::count = 0;
 
 int main()
 {
-
-	string pach = "FIL.bin";
-	ofstream fout;
-	Point* pnt;
-	pnt = new Point[4];
-	pnt[3].setXY(7);
-	fout.open(pach, ofstream::out);
-	if (!fout.is_open()) {
-		cout << "err: " << pach << endl;
-	}
-	else {
-		fout.write((char*)&pnt, sizeof(Point)*4);
-	}
-	fout.close();
-
-	ifstream fin;
-	Point* pnt2;
-	pnt2 = new Point[4];
-	fin.open(pach);
-
-	if (!fin.is_open()) {
-		cout << "err: " << pach << endl;
-	}
-	else {
-		while (fin.read((char*)&pnt2, sizeof(Point)*4)) {}
-		for (size_t i = 0; i < 4; i++)
-		{
-			cout << pnt2[i];
-		}
-	}
-	fin.close();
-
 
 }
 

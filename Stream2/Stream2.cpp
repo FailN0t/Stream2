@@ -6,11 +6,10 @@
 using namespace std;
 
 class Point {
-	char h[10] = "Hello";
 	int x, y;
 public:
 	Point(int x, int y): x{x}, y{y} {}
-	Point() : Point(0, 100000000){}
+	Point() : Point(0, 0){}
 
 	void setXY(int x = 0, int y = 0) {
 		this->x = x;
@@ -38,27 +37,32 @@ int main()
 
 	string pach = "FIL.bin";
 	ofstream fout;
-	Point pnt;
-
+	Point* pnt;
+	pnt = new Point[4];
+	pnt[3].setXY(7);
 	fout.open(pach, ofstream::out);
 	if (!fout.is_open()) {
 		cout << "err: " << pach << endl;
 	}
 	else {
-		fout.write((char*)&pnt, sizeof(Point));
+		fout.write((char*)&pnt, sizeof(Point)*4);
 	}
 	fout.close();
 
 	ifstream fin;
-	Point pnt2;
+	Point* pnt2;
+	pnt2 = new Point[4];
 	fin.open(pach);
 
 	if (!fin.is_open()) {
 		cout << "err: " << pach << endl;
 	}
 	else {
-		while (fin.read((char*)&pnt2, sizeof(Point))) {}
-		cout << pnt2;
+		while (fin.read((char*)&pnt2, sizeof(Point)*4)) {}
+		for (size_t i = 0; i < 4; i++)
+		{
+			cout << pnt2[i];
+		}
 	}
 	fin.close();
 	

@@ -73,6 +73,20 @@ class ArrPoint {
 		fout.close();
 		return true;
 	}
+	bool rdSize() {
+		ifstream fin;
+		fin.open(pach);
+
+		if (!fin.is_open()) {
+			cout << "err: " << pach << endl;
+			return false;
+		}
+		else {
+			fin.read((char*)&size, sizeof(int));
+		}
+		fin.close();
+		return true;
+	}
 
 	bool rdPach() {
 		ifstream fin;
@@ -83,7 +97,6 @@ class ArrPoint {
 			return false;
 		}
 		else {
-			fin.read((char*)&size, sizeof(int));
 			fin.read((char*)&pnt, sizeof(Point) * size);
 		}
 		fin.close();
@@ -104,7 +117,7 @@ public:
 	}
 	ArrPoint():ArrPoint(5){}
 	ArrPoint(string pach) {
-
+		if()
 	}
 };
 
